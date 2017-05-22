@@ -1,0 +1,224 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Account{
+public:
+    int acc_no;
+    char name[50];
+    string type;
+    int balance ;
+
+public:
+
+    void Create_Account();
+    void Access_Account();
+    void Current_Balance();
+    void Withdraw(int w);
+    void ShowDetail();
+    void deposit(int d);
+    void tranfer(int t);
+
+};
+ void Account::Create_Account(){
+
+        cout << "Enter Account No  : " <<  endl;
+        cin >> acc_no;
+
+        cout << "Enter your Name : " << endl;
+        cin.ignore();
+        cin.getline(name , 50);
+
+        cout << "Enter Account Type : " << endl;
+        cin >> type;
+        cout << "Enter Initial Amount : " << endl;
+        cin >> balance;
+        cout << "\n Account Created : ";
+        cout << "\n : -------------------------------- : " << endl;
+
+ }
+
+ void Account::ShowDetail(){
+
+    cout << "\n\nName : " << name;
+    cout << "\nAccount No : " << acc_no;
+    cout << "\nAccount Type : " << type;
+    cout << "\nCurrent Balance : " << balance;
+
+
+ }
+
+ void Account::Access_Account(){
+
+
+        cout << "\n\t\t\t Welcome Mr/Ms. " << name << endl;
+
+
+ }
+
+ void Account::Current_Balance(){
+
+    cout << "Your Current Balance is : " << balance;
+
+ }
+
+ void Account::Withdraw(int w){
+
+        if(balance>=w){
+
+
+            balance = balance - w;
+            Current_Balance();
+        }
+        else
+            cout << "Error! Not Enough Memory";
+
+}
+
+void Account::deposit(int d){
+
+
+        balance = balance + d;
+
+      cout << "Successfully Added : ";
+        Current_Balance();
+
+
+
+
+}
+void Account::tranfer(int t){
+
+
+    balance = balance + t;
+
+
+}
+
+
+int main()
+{
+    int a, b, cash , amount, input , index = 0;
+    Account A[100];
+
+
+        do{
+        y:
+        cout << "\n\t\t\t  Select an Option " << endl;
+        cout << "\n\t\t\t 01 Create Account ";
+        cout << "\n\t\t\t 02 Access Account ";
+        cout << "\n\t\t\t 03 Exit Program ";
+        cin >> a;
+        switch(a){
+
+        case 1:
+
+        A[index].Create_Account();
+        index++;
+       // cout <<  "\n" << index ;
+
+
+        break;
+
+        case 2:
+        cout <<  " \n Enter Account Number : " ;
+        cin >> b;
+        for(int i =0; i<index; i++)
+            {
+                    if (A[i].acc_no == b){
+                        A[i].Access_Account();
+                        x:
+                        cout << "\n\n\t\t\t 01 Show Full Detail :  ";
+                        cout << "\n\t\t\t 02 WithDraw Money  : ";
+                        cout << "\n\t\t\t 03 Deposit Money  : ";
+                        cout << "\n\t\t\t 04 Transfer Money  : ";
+                        cout << "\n\t\t\t 05 Sign Out Account  : ";
+                        cin >> input;
+                        do{
+                       switch(input){
+
+                        case 1:
+                        A[i].ShowDetail();
+                        goto x;
+                        break;
+
+
+                        case 2:
+                        cout << "\n Amount : ";
+                        cin >> cash;
+                        A[i].Withdraw(cash);
+                        goto x;
+                        break;
+
+
+                        case 3:
+                        cout << "\n Amount : ";
+                        cin >> cash;
+                        A[i].deposit(cash);
+                        goto x;
+                        break;
+
+                        case 4:
+                        cout << "\n Enter Account No  : ";
+                        cin >> b;
+
+                        for(int i =0; i<index; i++)
+                            {
+                        if (A[i].acc_no == b){
+                        cout << "Account Holder Name : " << " "  << A[i].name << endl;
+                        cout << "Enter Amount : ";
+                        cin >> amount;
+                        A[i].tranfer(amount);
+
+
+
+                        }
+
+
+                            }
+
+
+
+                            goto x;
+                        break;
+
+                        case 5:
+                        cout << "\n Successfully Sign Out : ";
+                        goto y;
+                        break;
+
+
+
+
+                        default:
+                            break;
+
+                       }
+
+
+
+                    }while(input!=5);
+
+
+                    }
+
+
+            }
+
+            break;
+
+                        case 3:
+
+                            return (0);
+                            break;
+
+
+        }
+
+          }while(a!=-1);
+
+
+
+    return 0;
+}
